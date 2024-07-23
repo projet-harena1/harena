@@ -1,0 +1,22 @@
+[
+  {
+    "nom": "Euro",
+    "code": "EUR"
+  },
+  {
+    "nom": "Dollar",
+    "code": "USD"
+  },
+  {
+    "nom": "Yen",
+    "code": "JPY"
+  },
+  {
+    "nom": "Livre",
+    "code": "GBP"
+  },
+  {
+    "nom": "Franc",
+    "code": "CHF"
+  }
+]

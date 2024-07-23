@@ -1,0 +1,27 @@
+[
+  {
+    "possessionId": 1,
+    "dateDouverture": "2024-01-01",
+    "type": "DETTE"
+  },
+  {
+    "possessionId": 2,
+    "dateDouverture": "2024-01-01",
+    "type": "CREANCE"
+  },
+  {
+    "possessionId": 3,
+    "dateDouverture": "2024-01-01",
+    "type": "AUTRES"
+  },
+  {
+    "possessionId": 4,
+    "dateDouverture": "2024-01-01",
+    "type": "DETTE"
+  },
+  {
+    "possessionId": 5,
+    "dateDouverture": "2024-01-01",
+    "type": "CREANCE"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "possessionId": 1,
+    "argentId": 1,
+    "debut": "2024-01-01",
+    "fin": "2024-12-31",
+    "fluxMensuel": 1000,
+    "dateDOperation": 15
+  },
+  {
+    "possessionId": 2,
+    "argentId": 2,
+    "debut": "2024-01-01",
+    "fin": "2024-12-31",
+    "fluxMensuel": 1500,
+    "dateDOperation": 20
+  },
+  {
+    "possessionId": 3,
+    "argentId": 3,
+    "debut": "2024-01-01",
+    "fin": "2024-12-31",
+    "fluxMensuel": 2000,
+    "dateDOperation": 25
+  },
+  {
+    "possessionId": 4,
+    "argentId": 4,
+    "debut": "2024-01-01",
+    "fin": "2024-12-31",
+    "fluxMensuel": 2500,
+    "dateDOperation": 30
+  },
+  {
+    "possessionId": 5,
+    "argentId": 5,
+    "debut": "2024-01-01",
+    "fin": "2024-12-31",
+    "fluxMensuel": 3000,
+    "dateDOperation": 35
+  }
+]

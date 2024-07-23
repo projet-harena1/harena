@@ -18,7 +18,6 @@ jacoco {
 }
 
 
-
 repositories {
 
     mavenCentral()
@@ -45,13 +44,13 @@ task generateJavaClient(type: GenerateTask) {
     modelPackage = "com.harena.api.endpoint.rest.model"
 
     configOptions = [
-            serializableModel: "true",
+            serializableModel   : "true",
             serializationLibrary: "jackson",
-            dateLibrary: "custom"
+            dateLibrary         : "custom"
     ]
     typeMappings = [
             // What date-time type to use when? https://i.stack.imgur.com/QPhGW.png
-            Date: "java.time.LocalDate",
+            Date    : "java.time.LocalDate",
             DateTime: "java.time.Instant",
     ]
     library = "native"
@@ -78,7 +77,7 @@ task generateTsClient(type: org.openapitools.generator.gradle.plugin.tasks.Gener
     ]
 }
 task publishJavaClientToMavenLocal(type: Exec, dependsOn: generateJavaClient) {
-    if (Os.isFamily(Os.FAMILY_WINDOWS)){
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
         commandLine './.shell/publish_gen_to_maven_local.bat'
     } else {
         commandLine './.shell/publish_gen_to_maven_local.sh'
@@ -194,7 +193,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.testcontainers:junit-jupiter:1.19.1'
     testImplementation 'org.junit-pioneer:junit-pioneer:2.2.0'
-
 
 
 }

@@ -1,0 +1,27 @@
+[
+  {
+    "possessionId": 1,
+    "dateDAcquisition": "2024-01-01",
+    "tauxDappreciationAnnuel": 0.05
+  },
+  {
+    "possessionId": 2,
+    "dateDAcquisition": "2024-01-01",
+    "tauxDappreciationAnnuel": 0.10
+  },
+  {
+    "possessionId": 3,
+    "dateDAcquisition": "2024-01-01",
+    "tauxDappreciationAnnuel": 0.03
+  },
+  {
+    "possessionId": 4,
+    "dateDAcquisition": "2024-01-01",
+    "tauxDappreciationAnnuel": 0.07
+  },
+  {
+    "possessionId": 5,
+    "dateDAcquisition": "2024-01-01",
+    "tauxDappreciationAnnuel": 0.04
+  }
+]
