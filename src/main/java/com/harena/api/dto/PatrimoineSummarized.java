@@ -1,17 +1,20 @@
-package com.harena.api.dto.json;
+package com.harena.api.dto;
 
+import com.harena.api.model.Personne;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PatrimoineDataFromJsonFile {
+public class PatrimoineSummarized {
     private String nom;
-    private String possesseurNom;
     private LocalDate t;
+    private Personne possesseur;
     private Integer valeurComptable;
 }

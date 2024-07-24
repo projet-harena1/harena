@@ -1,8 +1,8 @@
 package com.harena.api.endpoint.rest.controller;
 
+import com.harena.api.dto.PatrimoineSummarized;
 import com.harena.api.model.Patrimoine;
 import com.harena.api.service.PatrimoineService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,16 +10,29 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/patrimoines")
-@RequiredArgsConstructor
 public class PatrimoineController {
 
     private final PatrimoineService patrimoineService;
 
+    public PatrimoineController(PatrimoineService patrimoineService) {
+        this.patrimoineService = patrimoineService;
+    }
+
     @GetMapping
-    public List<Patrimoine> getPatrimoines(
-            @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "page_size", defaultValue = "10") int pageSize
-    ) {
+    private List<PatrimoineSummarized> getPatrimoines(
+            @RequestParam(name = "page") Integer page,
+            @RequestParam(name = "page_size") Integer pageSize
+    ){
         return patrimoineService.findAllPatrimoines(page, pageSize);
+    }
+
+    @PutMapping
+    public List<PatrimoineSummarized> crupdatePatrimoines(@RequestBody List<PatrimoineSummarized> patrimoines) {
+        return patrimoineService.crupdatePatrimoines(patrimoines);
+    }
+
+    @GetMapping("/{nom_patrimoine}:")
+    public PatrimoineSummarized getPatrimoineByNom(@PathVariable(name = "nom_patrimoine") String patrimoineName){
+       return patrimoineService.findPatrimoineByNom(patrimoineName);
     }
 }

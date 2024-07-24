@@ -9,8 +9,9 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MaterielDataFromJsonFile {
-    private Long possessionId;
-    private LocalDate dateDAcquisition;
-    private Double tauxDappreciationAnnuel;
+public class PatrimoineDataJsonFile {
+    private String nom;
+    private String possesseurNom;
+    private LocalDate t;
+    private Integer valeurComptable;
 }

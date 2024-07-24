@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeviseDataFromJsonFile {
-    private String nom;
-    private String code;
+public class FluxImpossiblesFluxArgentsDataJsonFile {
+    private Long fluxImpossiblesId;
+    private Long fluxArgentId;
 }
