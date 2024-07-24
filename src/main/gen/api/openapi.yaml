@@ -1,0 +1,853 @@
+openapi: 3.0.3
+info:
+  description: harena
+  title: harena
+  version: 1.0.0
+servers:
+- url: http://localhost:8080
+paths:
+  /patrimoines:
+    get:
+      operationId: getPatrimoines
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getPatrimoines_200_response'
+          description: liste paginée de patrimoines
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: Bad request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+          description: Not found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: Too many requests to the API
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+          description: Internal server error
+      summary: obtenir une liste paginée des patrimoines
+      tags:
+      - patrimoine
+      x-accepts: application/json
+    put:
+      operationId: crupdatePatrimoines
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/getPatrimoines_200_response'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getPatrimoines_200_response'
+          description: liste de patrimoines créés ou mis à jour
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: Bad request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+          description: Not found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: Too many requests to the API
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+          description: Internal server error
+      summary: "met à jour les patrimoines si le nom est donné, sinon on le crée"
+      tags:
+      - patrimoine
+      x-content-type: application/json
+      x-accepts: application/json
+  /patrimoines/{nom_patrimoine}:
+    get:
+      operationId: getPatrimoineByNom
+      parameters:
+      - description: nom du patrimoine avec les espaces remplacés par "_" s'il y en
+          a
+        explode: false
+        in: path
+        name: nom_patrimoine
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patrimoine'
+          description: le patrimoine demandé
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: Bad request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+          description: Not found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: Too many requests to the API
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+          description: Internal server error
+      summary: obtenir le patrimoine demandé
+      tags:
+      - patrimoine
+      x-accepts: application/json
+  /patrimoines/{nom_patrimoine}/possessions:
+    get:
+      operationId: getPatrimoinePossessions
+      parameters:
+      - description: nom du patrimoine avec les espaces remplacés par "_" s'il y en
+          a
+        explode: false
+        in: path
+        name: nom_patrimoine
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getPatrimoinePossessions_200_response'
+          description: liste paginée des possessions
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: Bad request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+          description: Not found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: Too many requests to the API
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+          description: Internal server error
+      summary: obtenir une liste paginée des possessions d'un patrimoine
+      tags:
+      - possession
+      x-accepts: application/json
+    put:
+      operationId: crupdatePatrimoinePossessions
+      parameters:
+      - description: nom du patrimoine avec les espaces remplacés par "_" s'il y en
+          a
+        explode: false
+        in: path
+        name: nom_patrimoine
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/getPatrimoinePossessions_200_response'
+        description: liste de possessions à ajouter ou à modifier
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getPatrimoinePossessions_200_response'
+          description: liste de possessions ajoutées ou modifiées
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: Bad request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+          description: Not found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: Too many requests to the API
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+          description: Internal server error
+      summary: "met à jour une possession d'un patrimoine si le nom existe, sinon\
+        \ on le crée"
+      tags:
+      - possession
+      x-content-type: application/json
+      x-accepts: application/json
+  /patrimoines/{nom_patrimoine}/possessions/{nom_possession}:
+    delete:
+      operationId: deletePatrimoinePossessionByNom
+      parameters:
+      - description: nom du patrimoine avec les espaces remplacés par "_" s'il y en
+          a
+        explode: false
+        in: path
+        name: nom_patrimoine
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: nom de la possession avec les espaces remplacés par "_" s'il
+          y en a
+        explode: false
+        in: path
+        name: nom_possession
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: no content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: Bad request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+          description: Not found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: Too many requests to the API
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+          description: Internal server error
+      summary: effacer un patrimoine d'une possession
+      tags:
+      - possession
+      x-accepts: application/json
+    get:
+      operationId: getPatrimoinePossessionByNom
+      parameters:
+      - description: nom du patrimoine avec les espaces remplacés par "_" s'il y en
+          a
+        explode: false
+        in: path
+        name: nom_patrimoine
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: nom de la possession avec les espaces remplacés par "_" s'il
+          y en a
+        explode: false
+        in: path
+        name: nom_possession
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Possession'
+          description: la possession demandée
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: Bad request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+          description: Not found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: Too many requests to the API
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+          description: Internal server error
+      summary: obtenir la possession demandée
+      tags:
+      - possession
+      x-accepts: application/json
+  /patrimoines/{nom_patrimoine}/flux-impossibles:
+    get:
+      operationId: getPatrimoineFluxImpossibles
+      parameters:
+      - description: nom du patrimoine avec les espaces remplacés par "_" s'il y en
+          a
+        explode: false
+        in: path
+        name: nom_patrimoine
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: debut
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: fin
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getPatrimoineFluxImpossibles_200_response'
+          description: flux impossibles du patrimoine actuel selon une plage de date
+            donnée
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: Bad request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+          description: Not found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: Too many requests to the API
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+          description: Internal server error
+      summary: obtenir une liste des flux impossibles du patrimoine dans une intervalle
+        donnée
+      tags:
+      - projection_future
+      x-accepts: application/json
+  /patrimoines/{nom_patrimoine}/graphe:
+    get:
+      operationId: getPatrimoineGraph
+      parameters:
+      - description: nom du patrimoine avec les espaces remplacés par "_" s'il y en
+          a
+        explode: false
+        in: path
+        name: nom_patrimoine
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: debut
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: fin
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            image/png:
+              schema:
+                format: byte
+                type: string
+          description: image montrant l'évolution du graphe
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: Bad request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+          description: Not found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: Too many requests to the API
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+          description: Internal server error
+      summary: obtenir le graphe de projection d'un patrimoine sur une plage de date
+        donnée
+      tags:
+      - projection_future
+      x-accepts: application/json
+components:
+  parameters:
+    nom_personne:
+      description: nom de la personne avec les espaces remplacés par "_" s'il y en
+        a
+      explode: false
+      in: path
+      name: nom_personne
+      required: true
+      schema:
+        type: string
+      style: simple
+    nom_patrimoine:
+      description: nom du patrimoine avec les espaces remplacés par "_" s'il y en
+        a
+      explode: false
+      in: path
+      name: nom_patrimoine
+      required: true
+      schema:
+        type: string
+      style: simple
+    nom_possession:
+      description: nom de la possession avec les espaces remplacés par "_" s'il y
+        en a
+      explode: false
+      in: path
+      name: nom_possession
+      required: true
+      schema:
+        type: string
+      style: simple
+    page:
+      explode: true
+      in: query
+      name: page
+      required: false
+      schema:
+        type: integer
+      style: form
+    page_size:
+      explode: true
+      in: query
+      name: page_size
+      required: false
+      schema:
+        type: integer
+      style: form
+    debut:
+      explode: true
+      in: query
+      name: debut
+      required: false
+      schema:
+        format: date
+        type: string
+      style: form
+    fin:
+      explode: true
+      in: query
+      name: fin
+      required: false
+      schema:
+        format: date
+        type: string
+      style: form
+  responses:
+    "400":
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestException'
+      description: Bad request
+    "403":
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotAuthorizedException'
+      description: Forbidden
+    "404":
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceNotFoundException'
+      description: Not found
+    "429":
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TooManyRequestsException'
+      description: Too many requests to the API
+    "500":
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InternalServerException'
+      description: Internal server error
+  schemas:
+    Personne:
+      example:
+        nom: nom
+      properties:
+        nom:
+          type: string
+      type: object
+    Devise:
+      properties:
+        nom:
+          type: string
+        code:
+          type: string
+      type: object
+    PossessionAvecType:
+      properties:
+        t:
+          format: date
+          type: string
+        nom:
+          type: string
+        valeur_comptable:
+          type: integer
+        devise:
+          $ref: '#/components/schemas/Devise'
+      type: object
+    Possession:
+      example:
+        materiel: null
+        flux_argent: null
+        argent: null
+        type: ARGENT
+      properties:
+        type:
+          enum:
+          - ARGENT
+          - MATERIEL
+          - FLUXARGENT
+          type: string
+        argent:
+          $ref: '#/components/schemas/Argent'
+        materiel:
+          $ref: '#/components/schemas/Materiel'
+        flux_argent:
+          $ref: '#/components/schemas/FluxArgent'
+      type: object
+    Patrimoine:
+      example:
+        t: 2000-01-23
+        possesseur:
+          nom: nom
+        valeur_comptable: 0
+        nom: nom
+      properties:
+        nom:
+          type: string
+        possesseur:
+          $ref: '#/components/schemas/Personne'
+        t:
+          format: date
+          type: string
+        valeur_comptable:
+          type: integer
+      type: object
+    Argent:
+      allOf:
+      - $ref: '#/components/schemas/PossessionAvecType'
+      - $ref: '#/components/schemas/Argent_allOf'
+      type: object
+    Materiel:
+      allOf:
+      - $ref: '#/components/schemas/PossessionAvecType'
+      - $ref: '#/components/schemas/Materiel_allOf'
+      type: object
+    FluxArgent:
+      allOf:
+      - $ref: '#/components/schemas/PossessionAvecType'
+      - $ref: '#/components/schemas/FluxArgent_allOf'
+      type: object
+    FluxImpossibles:
+      example:
+        date: 2000-01-23
+        valeur_argent: 0
+        nom_argent: nom_argent
+        flux_argents:
+        - null
+        - null
+      properties:
+        nom_argent:
+          type: string
+        date:
+          format: date
+          type: string
+        valeur_argent:
+          type: integer
+        flux_argents:
+          items:
+            $ref: '#/components/schemas/FluxArgent'
+          type: array
+      type: object
+    Exception:
+      properties:
+        type:
+          type: string
+        message:
+          type: string
+      type: object
+    BadRequestException:
+      allOf:
+      - $ref: '#/components/schemas/Exception'
+      example:
+        type: BadRequestException
+        message: Bad request
+    NotAuthorizedException:
+      allOf:
+      - $ref: '#/components/schemas/Exception'
+      example:
+        type: NotAuthorizedException
+        message: Not authorized
+    ResourceNotFoundException:
+      allOf:
+      - $ref: '#/components/schemas/Exception'
+      example:
+        type: ResourceNotFoundException
+        message: Resource of type <T> identified by <I> not found
+    TooManyRequestsException:
+      allOf:
+      - $ref: '#/components/schemas/Exception'
+      example:
+        type: TooManyRequestsException
+        message: Too many requests
+    InternalServerException:
+      allOf:
+      - $ref: '#/components/schemas/Exception'
+      example:
+        type: InternalServerException
+        message: Unexpected error
+    getPatrimoines_200_response:
+      example:
+        data:
+        - t: 2000-01-23
+          possesseur:
+            nom: nom
+          valeur_comptable: 0
+          nom: nom
+        - t: 2000-01-23
+          possesseur:
+            nom: nom
+          valeur_comptable: 0
+          nom: nom
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Patrimoine'
+          type: array
+      type: object
+    getPatrimoinePossessions_200_response:
+      example:
+        data:
+        - materiel: null
+          flux_argent: null
+          argent: null
+          type: ARGENT
+        - materiel: null
+          flux_argent: null
+          argent: null
+          type: ARGENT
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Possession'
+          type: array
+      type: object
+    getPatrimoineFluxImpossibles_200_response:
+      example:
+        data:
+        - date: 2000-01-23
+          valeur_argent: 0
+          nom_argent: nom_argent
+          flux_argents:
+          - null
+          - null
+        - date: 2000-01-23
+          valeur_argent: 0
+          nom_argent: nom_argent
+          flux_argents:
+          - null
+          - null
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/FluxImpossibles'
+          type: array
+      type: object
+    Argent_allOf:
+      properties:
+        date_d_ouverture:
+          format: date
+          type: string
+        type:
+          enum:
+          - DETTE
+          - CREANCE
+          - AUTRES
+          type: string
+      example: null
+    Materiel_allOf:
+      properties:
+        date_d_acquisition:
+          format: date
+          type: string
+        taux_dappreciation_annuel:
+          format: double
+          type: number
+      example: null
+    FluxArgent_allOf:
+      properties:
+        argent:
+          $ref: '#/components/schemas/Argent'
+        debut:
+          format: date
+          type: string
+        fin:
+          format: date
+          type: string
+        flux_mensuel:
+          type: integer
+        date_d_operation:
+          type: integer
+      example: null
+
