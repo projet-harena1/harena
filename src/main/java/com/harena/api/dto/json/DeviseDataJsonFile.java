@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DeviseDataJsonFile {
-    private String nom;
-    private String code;
+  private String nom;
+  private String code;
 }

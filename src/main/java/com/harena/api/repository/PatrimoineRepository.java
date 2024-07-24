@@ -4,5 +4,5 @@ import com.harena.api.dto.json.PatrimoineDataJsonFile;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PatrimoineRepository extends LoadDataFromJsonFileInterface<PatrimoineDataJsonFile> {
-}
+public interface PatrimoineRepository
+    extends LoadDataFromJsonFileInterface<PatrimoineDataJsonFile> {}
