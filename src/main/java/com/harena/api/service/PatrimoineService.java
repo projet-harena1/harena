@@ -8,5 +8,5 @@ import java.util.List;
 public interface PatrimoineService {
     List<PatrimoineSummarized> findAllPatrimoines(Integer page, Integer pageSize);
     List<PatrimoineSummarized> crupdatePatrimoines(List<PatrimoineSummarized> patrimoines);
-    PatrimoineSummarized findPatrimoineByNom(String patrimoineName);
+    PatrimoineSummarized findPatrimoineByNom(String patrimoineNom);
 }
