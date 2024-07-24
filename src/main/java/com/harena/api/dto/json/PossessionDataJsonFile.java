@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PossessionDataFromJsonFile {
+public class PossessionDataJsonFile {
     private Long id;
     private PossessionType type;
     private LocalDate t;

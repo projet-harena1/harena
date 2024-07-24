@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransfertArgentDataFromJsonFile {
+public class TransfertArgentDataJsonFile {
     private String nom;
     private Long depuisArgentId;
     private Long versArgentId;

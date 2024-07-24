@@ -1,84 +1,60 @@
 package com.harena.api.repository.impl;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.harena.api.dto.json.ArgentDataFromJsonFile;
+import com.harena.api.dto.json.ArgentDataJsonFile;
 import com.harena.api.repository.ArgentRepository;
-import lombok.Cleanup;
-import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.harena.api.repository.ReadDataFromJsonFile;
+import com.harena.api.repository.WriteDataToJsonFile;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-
 @Repository
 public class ArgentRepositoryImpl implements ArgentRepository {
-
-    private final ObjectMapper objectMapper;
+    private final ReadDataFromJsonFile<ArgentDataJsonFile> readDataFromJsonFile;
+    private final WriteDataToJsonFile<ArgentDataJsonFile> writeDataToJsonFile;
     private final Path filePath;
 
     public ArgentRepositoryImpl(
-            @Qualifier("customObjectMapper") ObjectMapper objectMapper,
-            @Value("${path.to.file}") String filePath
+            ReadDataFromJsonFile<ArgentDataJsonFile> readDataFromJsonFile,
+            WriteDataToJsonFile<ArgentDataJsonFile> writeDataToJsonFile,
+            @Value("${path.to.file.argent}") String filePath
     ) {
-        this.objectMapper = objectMapper;
+        this.readDataFromJsonFile = readDataFromJsonFile;
+        this.writeDataToJsonFile = writeDataToJsonFile;
         this.filePath = Paths.get(filePath);
     }
 
-
     @Override
-    public List<ArgentDataFromJsonFile> loadAllData() {
-        return readArgentDataFromFile();
+    public List<ArgentDataJsonFile> loadAllData() {
+        return readDataFromJsonFile
+                .apply(ArgentDataJsonFile.class)
+                .apply(filePath);
     }
 
     @Override
-    public Optional<ArgentDataFromJsonFile> create(ArgentDataFromJsonFile toCreate) {
-        var currentData = readArgentDataFromFile();
+    public Optional<ArgentDataJsonFile> create(ArgentDataJsonFile toCreate) {
+        var currentData = readDataFromJsonFile
+                .apply(ArgentDataJsonFile.class)
+                .apply(filePath);
         currentData.add(toCreate);
-        writeArgentDataToFile(currentData);
+        writeDataToJsonFile.apply(currentData, filePath);
         return Optional.of(toCreate);
     }
 
     @Override
-    public Optional<ArgentDataFromJsonFile> update(ArgentDataFromJsonFile toUpdated) {
-        var currentData = readArgentDataFromFile();
-        var index = currentData.indexOf(toUpdated);
+    public Optional<ArgentDataJsonFile> update(ArgentDataJsonFile toUpdate) {
+        var currentData = readDataFromJsonFile.apply(ArgentDataJsonFile.class).apply(filePath);
+        var index = currentData.indexOf(toUpdate);
         if (index != -1) {
-            currentData.set(index, toUpdated);
-            writeArgentDataToFile(currentData);
-            return Optional.of(toUpdated);
+            currentData.set(index, toUpdate);
+            writeDataToJsonFile.apply(currentData, filePath);
+            return Optional.of(toUpdate);
         }
         return Optional.empty();
     }
 
-    @SneakyThrows
-    private List<ArgentDataFromJsonFile> readArgentDataFromFile() {
-        if (Files.notExists(filePath)) {
-            return Collections.emptyList();
-        }
-        @Cleanup
-        var inputStream = Files.newInputStream(filePath);
-        return objectMapper.readValue(inputStream, new TypeReference<>() {
-        });
-    }
-
-    @SneakyThrows
-    private void writeArgentDataToFile(List<ArgentDataFromJsonFile> argentDTOs) {
-        if (Files.notExists(filePath.getParent())) {
-            Files.createDirectories(filePath.getParent());
-        }
-        if (Files.notExists(filePath)) {
-            Files.createFile(filePath);
-        }
-        @Cleanup
-        var outputStream = Files.newOutputStream(filePath);
-        objectMapper.writeValue(outputStream, argentDTOs);
-    }
 }
