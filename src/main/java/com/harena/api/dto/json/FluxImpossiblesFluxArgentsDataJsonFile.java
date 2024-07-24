@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FluxImpossiblesFluxArgentsDataJsonFile {
-    private Long fluxImpossiblesId;
-    private Long fluxArgentId;
+  private Long fluxImpossiblesId;
+  private Long fluxArgentId;
 }

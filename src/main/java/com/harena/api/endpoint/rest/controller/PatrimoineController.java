@@ -1,12 +1,13 @@
 package com.harena.api.endpoint.rest.controller;
 
 import com.harena.api.dto.PatrimoineSummarized;
+
 import com.harena.api.model.Patrimoine;
 
-import com.harena.api.service.PatrimoineService;
-import org.springframework.web.bind.annotation.*;
 
+import com.harena.api.service.PatrimoineService;
 import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -36,4 +37,5 @@ public class PatrimoineController {
     public PatrimoineSummarized getPatrimoineByNom(@PathVariable(name = "nom_patrimoine") String patrimoineName){
        return patrimoineService.findPatrimoineByNom(patrimoineName);
     }
+
 }

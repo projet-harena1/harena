@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PersonneDataJsonFile {
-    private String nom;
+  private String nom;
 }

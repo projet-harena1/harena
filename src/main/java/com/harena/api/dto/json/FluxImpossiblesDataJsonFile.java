@@ -1,16 +1,15 @@
 package com.harena.api.dto.json;
 
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class FluxImpossiblesDataJsonFile {
-    private String nomArgent;
-    private LocalDate date;
-    private Integer valeurArgent;
+  private String nomArgent;
+  private LocalDate date;
+  private Integer valeurArgent;
 }
