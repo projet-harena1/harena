@@ -56,11 +56,13 @@ public class PatrimoineServiceImpl implements PatrimoineService {
 
     @Override
     public PatrimoineSummarized findPatrimoineByNom(String patrimoineNom) {
+
         var patrimoineDataList = patrimoineRepository.loadAllData();
         var personMap = personRepository.loadAllData().stream()
                 .collect(Collectors.toMap(PersonneDataJsonFile::getNom, Function.identity()));
         var patrimoineData = patrimoineDataList.stream()
                 .filter(data -> data.getNom().equals(patrimoineNom))
+
                 .findFirst()
                 .orElse(null);
         return convertToSummarized(patrimoineData, personMap);

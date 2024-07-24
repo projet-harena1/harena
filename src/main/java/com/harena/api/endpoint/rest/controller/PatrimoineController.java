@@ -1,6 +1,8 @@
 package com.harena.api.endpoint.rest.controller;
 
 import com.harena.api.dto.PatrimoineSummarized;
+import com.harena.api.model.Patrimoine;
+
 import com.harena.api.service.PatrimoineService;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +31,7 @@ public class PatrimoineController {
     public List<PatrimoineSummarized> crupdatePatrimoines(@RequestBody List<PatrimoineSummarized> patrimoines) {
         return patrimoineService.crupdatePatrimoines(patrimoines);
     }
-
+  
     @GetMapping("/{nom_patrimoine}")
     public PatrimoineSummarized getPatrimoineByNom(@PathVariable(name = "nom_patrimoine") String patrimoineName){
        return patrimoineService.findPatrimoineByNom(patrimoineName);
