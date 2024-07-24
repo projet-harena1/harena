@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FluxImpossiblesFluxArgentsDataFromJsonFile {
-    private Long fluxImpossiblesId;
-    private Long fluxArgentId;
+public class PersonneDataJsonFile {
+    private String nom;
 }

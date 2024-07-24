@@ -1,8 +1,8 @@
 package com.harena.api.repository;
 
-import com.harena.api.dto.json.ArgentDataFromJsonFile;
+import com.harena.api.dto.json.ArgentDataJsonFile;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArgentRepository extends LoadDataFromFileInterface<ArgentDataFromJsonFile> {
+public interface ArgentRepository extends LoadDataFromJsonFileInterface<ArgentDataJsonFile> {
 }

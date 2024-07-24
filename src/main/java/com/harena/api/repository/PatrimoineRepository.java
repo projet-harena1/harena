@@ -1,11 +1,8 @@
 package com.harena.api.repository;
 
-import com.harena.api.model.Patrimoine;
+import com.harena.api.dto.json.PatrimoineDataJsonFile;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface PatrimoineRepository {
-    List<Patrimoine> findAllPatrimoines();
+public interface PatrimoineRepository extends LoadDataFromJsonFileInterface<PatrimoineDataJsonFile> {
 }
