@@ -24,14 +24,12 @@ public class FluxArgentRepositoryImpl implements FluxArgentRepository {
         this.filePath = Paths.get(filePath);
     }
 
-    @Override
     public List<FluxArgentDataJsonFile> loadAllData() {
         return readDataFromJsonFile
                 .apply(FluxArgentDataJsonFile.class)
                 .apply(filePath);
     }
 
-    @Override
     public Optional<FluxArgentDataJsonFile> create(FluxArgentDataJsonFile toCreate) {
         var currentData = readDataFromJsonFile
                 .apply(FluxArgentDataJsonFile.class)
@@ -41,7 +39,6 @@ public class FluxArgentRepositoryImpl implements FluxArgentRepository {
         return Optional.of(toCreate);
     }
 
-    @Override
     public Optional<FluxArgentDataJsonFile> update(FluxArgentDataJsonFile toUpdate) {
         var currentData = readDataFromJsonFile.apply(FluxArgentDataJsonFile.class).apply(filePath);
         var index = currentData.indexOf(toUpdate);
