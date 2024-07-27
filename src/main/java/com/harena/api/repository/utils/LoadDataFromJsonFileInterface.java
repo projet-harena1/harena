@@ -1,4 +1,4 @@
-package com.harena.api.repository;
+package com.harena.api.repository.utils;
 
 import java.util.List;
 import java.util.Optional;
