@@ -6,10 +6,12 @@ import com.harena.api.repository.utils.BaseRepository;
 import com.harena.api.repository.utils.ReadDataFromJsonFile;
 import com.harena.api.repository.utils.WriteDataToJsonFile;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class DeviseRepositoryImpl extends BaseRepository<DeviseDataJsonFile> implements DeviseRepository {
     public DeviseRepositoryImpl(
             ReadDataFromJsonFile<DeviseDataJsonFile> readDataFromJsonFile,
