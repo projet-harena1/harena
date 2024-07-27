@@ -1,5 +1,6 @@
 package com.harena.api.repository.impl;
 
+import com.harena.api.dto.json.DeviseDataJsonFile;
 import com.harena.api.dto.json.FluxArgentDataJsonFile;
 import com.harena.api.repository.FluxArgentRepository;
 import com.harena.api.repository.utils.BaseRepository;
@@ -17,28 +18,14 @@ public class FluxArgentRepositoryImpl extends BaseRepository<FluxArgentDataJsonF
     }
 
     public List<FluxArgentDataJsonFile> loadAllData() {
-        return readDataFromJsonFile
-                .apply(FluxArgentDataJsonFile.class)
-                .apply(filePath);
+        return super.loadAllData(FluxArgentDataJsonFile.class);
     }
 
     public Optional<FluxArgentDataJsonFile> create(FluxArgentDataJsonFile toCreate) {
-        var currentData = readDataFromJsonFile
-                .apply(FluxArgentDataJsonFile.class)
-                .apply(filePath);
-        currentData.add(toCreate);
-        writeDataToJsonFile.apply(currentData, filePath);
-        return Optional.of(toCreate);
+        return super.create(FluxArgentDataJsonFile.class, toCreate);
     }
 
     public Optional<FluxArgentDataJsonFile> update(FluxArgentDataJsonFile toUpdate) {
-        var currentData = readDataFromJsonFile.apply(FluxArgentDataJsonFile.class).apply(filePath);
-        var index = currentData.indexOf(toUpdate);
-        if (index != -1) {
-            currentData.set(index, toUpdate);
-            writeDataToJsonFile.apply(currentData, filePath);
-            return Optional.of(toUpdate);
-        }
-        return Optional.empty();
+        return super.update(FluxArgentDataJsonFile.class, toUpdate);
     }
 }
