@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ArgentRepository extends BaseRepository<ArgentDataJsonFile> implements com.harena.api.repository.ArgentRepository {
+public class ArgentRepositoryImpl extends BaseRepository<ArgentDataJsonFile> implements com.harena.api.repository.ArgentRepository {
 
-    public ArgentRepository(
+    public ArgentRepositoryImpl(
             ReadDataFromJsonFile<ArgentDataJsonFile> readDataFromJsonFile,
             WriteDataToJsonFile<ArgentDataJsonFile> writeDataToJsonFile,
             @Value("${path.to.file.argent}") String filePath

@@ -1,1 +1,83 @@
-[{"possessionId":1,"dateDouverture":[2024,1,1],"type":"DETTE"},{"possessionId":2,"dateDouverture":[2024,1,1],"type":"CREANCE"},{"possessionId":3,"dateDouverture":[2024,1,1],"type":"AUTRES"},{"possessionId":4,"dateDouverture":[2024,1,1],"type":"DETTE"},{"possessionId":5,"dateDouverture":[2024,1,1],"type":"CREANCE"},{"possessionId":6,"dateDouverture":[2024,7,23],"type":"DETTE"},{"possessionId":7,"dateDouverture":[2024,7,23],"type":"DETTE"},{"possessionId":17,"dateDouverture":[2024,7,24],"type":"DETTE"},{"possessionId":27,"dateDouverture":[2024,7,24],"type":"DETTE"}]
+[
+  {
+    "possessionId": 1,
+    "dateDouverture": [
+      2024,
+      1,
+      1
+    ],
+    "type": "DETTE"
+  },
+  {
+    "possessionId": 2,
+    "dateDouverture": [
+      2024,
+      1,
+      1
+    ],
+    "type": "CREANCE"
+  },
+  {
+    "possessionId": 3,
+    "dateDouverture": [
+      2024,
+      1,
+      1
+    ],
+    "type": "AUTRES"
+  },
+  {
+    "possessionId": 4,
+    "dateDouverture": [
+      2024,
+      1,
+      1
+    ],
+    "type": "DETTE"
+  },
+  {
+    "possessionId": 5,
+    "dateDouverture": [
+      2024,
+      1,
+      1
+    ],
+    "type": "CREANCE"
+  },
+  {
+    "possessionId": 6,
+    "dateDouverture": [
+      2024,
+      7,
+      23
+    ],
+    "type": "DETTE"
+  },
+  {
+    "possessionId": 7,
+    "dateDouverture": [
+      2024,
+      7,
+      23
+    ],
+    "type": "DETTE"
+  },
+  {
+    "possessionId": 17,
+    "dateDouverture": [
+      2024,
+      7,
+      24
+    ],
+    "type": "DETTE"
+  },
+  {
+    "possessionId": 27,
+    "dateDouverture": [
+      2024,
+      7,
+      24
+    ],
+    "type": "DETTE"
+  }
+]

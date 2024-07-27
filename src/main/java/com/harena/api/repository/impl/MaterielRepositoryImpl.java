@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class MaterielRepository extends BaseRepository<MaterielDataJsonFile> implements com.harena.api.repository.MaterielRepository {
+public class MaterielRepositoryImpl extends BaseRepository<MaterielDataJsonFile> implements com.harena.api.repository.MaterielRepository {
 
-    public MaterielRepository(
+    public MaterielRepositoryImpl(
             ReadDataFromJsonFile<MaterielDataJsonFile> readDataFromJsonFile,
             WriteDataToJsonFile<MaterielDataJsonFile> writeDataToJsonFile,
-            @Value("${path.to.file.materiel}")  String filePath) {
+            @Value("${path.to.file.materiel}") String filePath) {
         super(readDataFromJsonFile, writeDataToJsonFile, filePath);
     }
 
@@ -32,6 +32,6 @@ public class MaterielRepository extends BaseRepository<MaterielDataJsonFile> imp
 
     @Override
     public Optional<MaterielDataJsonFile> update(MaterielDataJsonFile toUpdated) {
-       return super.update(MaterielDataJsonFile.class, toUpdated);
+        return super.update(MaterielDataJsonFile.class, toUpdated);
     }
 }

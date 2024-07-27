@@ -138,7 +138,7 @@ paths:
       tags:
         - possession
       operationId: getPatrimoinePossessions
-      summary:  obtenir une liste paginée des possessions d'un patrimoine
+      summary: obtenir une liste paginée des possessions d'un patrimoine
       parameters:
         - $ref: "#/components/parameters/nom_patrimoine"
         - $ref: "#/components/parameters/page"

@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class PersonRepository extends BaseRepository<PersonneDataJsonFile> implements com.harena.api.repository.PersonRepository {
-    public PersonRepository(
+public class PersonRepositoryImpl extends BaseRepository<PersonneDataJsonFile> implements com.harena.api.repository.PersonRepository {
+    public PersonRepositoryImpl(
             ReadDataFromJsonFile<PersonneDataJsonFile> readDataFromJsonFile,
             WriteDataToJsonFile<PersonneDataJsonFile> writeDataToJsonFile,
             @Value("${path.to.file.person}") String filePath) {

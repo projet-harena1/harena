@@ -21,7 +21,7 @@ public class PatrimoineController {
     private List<PatrimoineSummarized> getPatrimoines(
             @RequestParam(name = "page") Integer page,
             @RequestParam(name = "page_size") Integer pageSize
-    ){
+    ) {
         return patrimoineService.findAllPatrimoines(page, pageSize);
     }
 
@@ -31,7 +31,7 @@ public class PatrimoineController {
     }
 
     @GetMapping("/{nom_patrimoine}")
-    public PatrimoineSummarized getPatrimoineByNom(@PathVariable(name = "nom_patrimoine") String patrimoineName){
-       return patrimoineService.findPatrimoineByNom(patrimoineName);
+    public PatrimoineSummarized getPatrimoineByNom(@PathVariable(name = "nom_patrimoine") String patrimoineName) {
+        return patrimoineService.findPatrimoineByNom(patrimoineName);
     }
 }

@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class PatrimoineRepository extends BaseRepository<PatrimoineDataJsonFile> implements com.harena.api.repository.PatrimoineRepository {
+public class PatrimoineRepositoryImpl extends BaseRepository<PatrimoineDataJsonFile> implements com.harena.api.repository.PatrimoineRepository {
 
-    public PatrimoineRepository(
+    public PatrimoineRepositoryImpl(
             ReadDataFromJsonFile<PatrimoineDataJsonFile> readDataFromJsonFile,
             WriteDataToJsonFile<PatrimoineDataJsonFile> writeDataToJsonFile,
             @Value("${path.to.file.patrimoine}") String filePath
@@ -28,7 +28,7 @@ public class PatrimoineRepository extends BaseRepository<PatrimoineDataJsonFile>
 
     @Override
     public Optional<PatrimoineDataJsonFile> create(PatrimoineDataJsonFile toCreate) {
-       return super.create(PatrimoineDataJsonFile.class, toCreate);
+        return super.create(PatrimoineDataJsonFile.class, toCreate);
     }
 
     @Override
