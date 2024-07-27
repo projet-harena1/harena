@@ -1,6 +1,7 @@
 package com.harena.api.repository.impl;
 
 import com.harena.api.dto.json.PersonneDataJsonFile;
+import com.harena.api.repository.PersonRepository;
 import com.harena.api.repository.utils.BaseRepository;
 import com.harena.api.repository.utils.ReadDataFromJsonFile;
 import com.harena.api.repository.utils.WriteDataToJsonFile;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class PersonRepositoryImpl extends BaseRepository<PersonneDataJsonFile> implements com.harena.api.repository.PersonRepository {
+public class PersonRepositoryImpl extends BaseRepository<PersonneDataJsonFile> implements PersonRepository {
     public PersonRepositoryImpl(
             ReadDataFromJsonFile<PersonneDataJsonFile> readDataFromJsonFile,
             WriteDataToJsonFile<PersonneDataJsonFile> writeDataToJsonFile,

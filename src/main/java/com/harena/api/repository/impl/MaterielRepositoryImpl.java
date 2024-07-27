@@ -1,6 +1,7 @@
 package com.harena.api.repository.impl;
 
 import com.harena.api.dto.json.MaterielDataJsonFile;
+import com.harena.api.repository.MaterielRepository;
 import com.harena.api.repository.utils.BaseRepository;
 import com.harena.api.repository.utils.ReadDataFromJsonFile;
 import com.harena.api.repository.utils.WriteDataToJsonFile;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class MaterielRepositoryImpl extends BaseRepository<MaterielDataJsonFile> implements com.harena.api.repository.MaterielRepository {
+public class MaterielRepositoryImpl extends BaseRepository<MaterielDataJsonFile> implements MaterielRepository {
 
     public MaterielRepositoryImpl(
             ReadDataFromJsonFile<MaterielDataJsonFile> readDataFromJsonFile,
