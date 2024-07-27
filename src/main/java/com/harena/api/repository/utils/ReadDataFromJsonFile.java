@@ -1,9 +1,8 @@
-package com.harena.api.repository;
+package com.harena.api.repository.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Cleanup;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.nio.file.Files;
@@ -17,9 +16,7 @@ public class ReadDataFromJsonFile<T> implements Function<Class<T>, Function<Path
 
     private final ObjectMapper objectMapper;
 
-    public ReadDataFromJsonFile(
-            @Qualifier("customObjectMapper") ObjectMapper objectMapper
-    ) {
+    public ReadDataFromJsonFile(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 

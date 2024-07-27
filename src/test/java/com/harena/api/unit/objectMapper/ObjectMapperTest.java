@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ObjectMapperTest extends FacadeIT {
+
     @Autowired
     ObjectMapper injectedBean;
     ObjectMapper newInstance = new ObjectMapper();
-
     SomeClassWithDatetimeField someClassWithDatetimeField =
             new SomeClassWithDatetimeField(Instant.now());
 
@@ -30,8 +30,7 @@ public class ObjectMapperTest extends FacadeIT {
     @Test
     void injected_bean_handles_java_datetime_module() {
         assertDoesNotThrow(
-                () ->
-                        injectedBean.readValue(
-                                someClassWithDatetimeField.toJsonString(), SomeClassWithDatetimeField.class));
+                () -> injectedBean.readValue(
+                        someClassWithDatetimeField.toJsonString(), SomeClassWithDatetimeField.class));
     }
 }

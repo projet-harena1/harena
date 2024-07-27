@@ -2,71 +2,49 @@
   {
     "nom": "Patrimoine A",
     "possesseurNom": "Jean Dupont",
-    "t": [
-      2024,
-      1,
-      1
-    ],
+    "t": "2024-01-01",
     "valeurComptable": 500000
   },
   {
     "nom": "Patrimoine B",
     "possesseurNom": "Marie Curie",
-    "t": [
-      2024,
-      1,
-      1
-    ],
+    "t": "2024-01-01",
     "valeurComptable": 300000
   },
   {
     "nom": "Patrimoine C",
     "possesseurNom": "Pierre Martin",
-    "t": [
-      2024,
-      1,
-      1
-    ],
+    "t": "2024-01-01",
     "valeurComptable": 200000
   },
   {
     "nom": "Patrimoine D",
     "possesseurNom": "Luc Dubois",
-    "t": [
-      2024,
-      1,
-      1
-    ],
+    "t": "2024-01-01",
     "valeurComptable": 100000
   },
   {
     "nom": "Patrimoine E",
     "possesseurNom": "Claire Lefevre",
-    "t": [
-      2024,
-      1,
-      1
-    ],
+    "t": "2024-01-01",
     "valeurComptable": 150000
   },
   {
     "nom": "Maison de Ville",
     "possesseurNom": "Jean Dupont",
-    "t": [
-      2024,
-      7,
-      24
-    ],
+    "t": "2024-07-24",
     "valeurComptable": 250000
   },
   {
     "nom": "Maison de Ville",
     "possesseurNom": "Dupont",
-    "t": [
-      2024,
-      7,
-      24
-    ],
+    "t": "2024-07-24",
     "valeurComptable": 250000
+  },
+  {
+    "nom": "Maison de Ville",
+    "possesseurNom": "Dupont",
+    "t": "2024-07-24",
+    "valeurComptable": 2770000
   }
 ]

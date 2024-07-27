@@ -4,7 +4,7 @@ info:
   description: harena
   version: 1.0.0
 servers:
-  - url: 'http://localhost:8081'
+  - url: 'http://localhost:8080'
 paths:
   /patrimoines:
     get:
@@ -113,7 +113,7 @@ paths:
                 data:
                   type: array
                   items:
-                    $ref: "#/components/schemas/Possession"
+                    $ref: "#/components/schemas/PossessionAvecType"
       responses:
         '200':
           description: liste de possessions ajoutées ou modifiées
@@ -125,7 +125,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: "#/components/schemas/Possession"
+                      $ref: "#/components/schemas/PossessionAvecType"
         '400':
           $ref: '#/components/responses/400'
         '404':
@@ -154,7 +154,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: "#/components/schemas/Possession"
+                      $ref: "#/components/schemas/PossessionAvecType"
         '400':
           $ref: '#/components/responses/400'
         '404':
@@ -178,7 +178,7 @@ paths:
           content:
             "application/json":
               schema:
-                $ref: "#/components/schemas/Possession"
+                $ref: "#/components/schemas/PossessionAvecType"
         '400':
           $ref: '#/components/responses/400'
         '404':
@@ -317,7 +317,7 @@ components:
           type: string
         code:
           type: string
-    PossessionAvecType:
+    Possession:
       type: object
       properties:
         t:
@@ -329,7 +329,7 @@ components:
           type: integer
         devise:
           $ref: "#/components/schemas/Devise"
-    Possession:
+    PossessionAvecType:
       type: object
       properties:
         type:
@@ -359,7 +359,7 @@ components:
     Argent:
       type: object
       allOf:
-        - $ref: "#/components/schemas/PossessionAvecType"
+        - $ref: "#/components/schemas/Possession"
         - properties:
             date_d_ouverture:
               type: string
@@ -373,7 +373,7 @@ components:
     Materiel:
       type: object
       allOf:
-        - $ref: "#/components/schemas/PossessionAvecType"
+        - $ref: "#/components/schemas/Possession"
         - properties:
             date_d_acquisition:
               type: string
@@ -384,7 +384,7 @@ components:
     FluxArgent:
       type: object
       allOf:
-        - $ref: "#/components/schemas/PossessionAvecType"
+        - $ref: "#/components/schemas/Possession"
         - properties:
             argent:
               $ref: "#/components/schemas/Argent"

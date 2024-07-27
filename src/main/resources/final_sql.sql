@@ -53,14 +53,14 @@ CREATE TABLE Patrimoine
 
 CREATE TABLE Possession
 (
-    id             SERIAL PRIMARY KEY,
+    id               SERIAL PRIMARY KEY,
     t                DATE,
     nom              VARCHAR(255),
-    patrimoine_nom  VARCHAR(255),
+    patrimoine_nom   VARCHAR(255),
     valeur_comptable INTEGER,
     devise_nom       VARCHAR(255),
     devise_code      VARCHAR(10),
-    type           VARCHAR(50),
+    type             VARCHAR(50),
     FOREIGN KEY (devise_nom, devise_code) REFERENCES Devise (nom, code),
     FOREIGN KEY (patrimoine_nom) REFERENCES Patrimoine (nom),
     CONSTRAINT chk_possession_type CHECK (type IN ('ARGENT', 'MATERIEL', 'FLUXARGENT'))

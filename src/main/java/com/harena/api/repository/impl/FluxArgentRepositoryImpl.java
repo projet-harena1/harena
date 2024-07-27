@@ -2,8 +2,8 @@ package com.harena.api.repository.impl;
 
 import com.harena.api.dto.json.FluxArgentDataJsonFile;
 import com.harena.api.repository.FluxArgentRepository;
-import com.harena.api.repository.ReadDataFromJsonFile;
-import com.harena.api.repository.WriteDataToJsonFile;
+import com.harena.api.repository.utils.ReadDataFromJsonFile;
+import com.harena.api.repository.utils.WriteDataToJsonFile;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
