@@ -10,6 +10,7 @@ import com.harena.api.service.PatrimoineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -64,6 +65,28 @@ public class PatrimoineServiceImpl implements PatrimoineService {
         }
         return this.toRestPatrimoine(patrimoine);
     }
+
+    @Override
+    public List<RestPatrimoine> projectionFuture(LocalDate futureDate) {
+        List<Patrimoine> allPatrimoines = patrimoineRepository.loadAllData();
+        return allPatrimoines.stream()
+                .map(patrimoine -> projectPatrimoineFuture(patrimoine, futureDate))
+                .map(this::toRestPatrimoine)
+                .collect(Collectors.toList());
+    }
+
+    private Patrimoine projectPatrimoineFuture(Patrimoine patrimoine, LocalDate futureDate) {
+        var possessionsFuture = patrimoine.possessions().stream()
+                .map(possession -> possession.projectionFuture(futureDate))
+                .collect(Collectors.toSet());
+        return new Patrimoine(
+                patrimoine.nom(),
+                patrimoine.possesseur(),
+                futureDate,
+                possessionsFuture
+        );
+    }
+
 
     private RestPatrimoine toRestPatrimoine(Patrimoine patrimoine){
         return new RestPatrimoine(
