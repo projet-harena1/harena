@@ -1,11 +1,13 @@
 package com.harena.api.service.impl;
 
 import com.harena.api.dto.responses.PossessionAvecType;
+import com.harena.api.enums.PossessionType;
 import com.harena.api.exceptions.ResourceNotFoundException;
 import com.harena.api.repository.ArgentRepository;
 import com.harena.api.repository.FluxArgentRepository;
 import com.harena.api.repository.MaterielRepository;
 import com.harena.api.repository.PatrimoineRepository;
+import com.harena.api.repository.model.Patrimoine;
 import com.harena.api.repository.model.possession.Argent;
 import com.harena.api.repository.model.possession.FluxArgent;
 import com.harena.api.repository.model.possession.Materiel;
@@ -13,7 +15,9 @@ import com.harena.api.service.PossessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -45,10 +49,35 @@ public class PossessionServiceImpl implements PossessionService {
     }
 
     @Override
-    public List<PossessionAvecType> getPatrimoinePossessions(String patrimoineNom, Long page, Long pageSize) {
-        return List.of();
+    public List<PossessionAvecType> findPatrimoinePossessions(String patrimoineNom, Long page, Long pageSize) {
+        List<PossessionAvecType> possessionAvecTypes = new ArrayList<>();
+        Patrimoine patrimoine = patrimoineRepository.findPatrimoineByNom(patrimoineNom);
+        if (patrimoine != null && patrimoine.possessions() != null) {
+            possessionAvecTypes = patrimoine.possessions().stream()
+                    .map(this::mapToPossessionAvecType)
+                    .skip((page - 1) * pageSize)
+                    .limit(pageSize)
+                    .collect(Collectors.toList());
+        }
+
+        return possessionAvecTypes;
     }
 
+    private PossessionAvecType mapToPossessionAvecType(Object possession) {
+        PossessionAvecType possessionAvecType = new PossessionAvecType();
+        if (possession instanceof Argent argent) {
+            possessionAvecType.setType(PossessionType.ARGENT);
+            possessionAvecType.setArgent(argent);
+        } else if (possession instanceof Materiel materiel) {
+            possessionAvecType.setType(PossessionType.MATERIEL);
+            possessionAvecType.setMateriel(materiel);
+        } else if (possession instanceof FluxArgent fluxArgent) {
+            possessionAvecType.setType(PossessionType.FLUXARGENT);
+            possessionAvecType.setFluxArgent(fluxArgent);
+        }
+
+        return possessionAvecType;
+    }
 
     private void saveMateriel(Materiel materiel, String patrimoineNom) {
         var patrimoine = patrimoineRepository.findPatrimoineByNom(patrimoineNom);

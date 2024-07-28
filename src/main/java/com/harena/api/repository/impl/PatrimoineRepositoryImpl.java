@@ -64,8 +64,13 @@ public class PatrimoineRepositoryImpl extends BaseRepository<PatrimoineDTO> impl
                 possesseur,
                 patrimoineDTO.getT(),
                 Stream.concat(
-                        fluxArgentRepository.loadAllData().stream()
-                                .filter(fluxArgent -> fluxArgent.getPatrimoine() != null && fluxArgent.getPatrimoine().nom().equals(patrimoineDTO.getNom())),
+                        fluxArgentRepository.loadAllData()
+                                .stream()
+                                .filter(
+                                        fluxArgent ->
+                                                fluxArgent.getPatrimoine() != null && fluxArgent.getPatrimoine().nom()
+                                                        .equals(patrimoineDTO.getNom())
+                                ),
                         Stream.concat(
                                 materielRepository.loadAllData().stream()
                                         .filter(materiel -> materiel.getPatrimoine() != null && materiel.getPatrimoine().nom().equals(patrimoineDTO.getNom())),

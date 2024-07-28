@@ -9,5 +9,5 @@ import java.util.List;
 @Service
 public interface PossessionService {
     List<PossessionAvecType> savePatrimoinePossessions(String patrimoineNom, List<PossessionAvecType> possessionAvecTypes);
-    List<PossessionAvecType> getPatrimoinePossessions(String patrimoineNom, Long page, Long pageSize);
+    List<PossessionAvecType> findPatrimoinePossessions(String patrimoineNom, Long page, Long pageSize);
 }

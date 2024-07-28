@@ -27,7 +27,7 @@ public class PossessionController {
             @RequestParam(name = "page") Long page,
             @RequestParam(name = "page_size") Long pageSize,
             @PathVariable (name = "nom_patrimoine")String patrimoineNom) {
-        return possessionService.getPatrimoinePossessions(patrimoineNom, page, pageSize);
+        return possessionService.findPatrimoinePossessions(patrimoineNom, page, pageSize);
     }
 
 }
