@@ -1,9 +1,9 @@
 package com.harena.api.repository;
 
-import com.harena.api.dto.json.MaterielDataJsonFile;
-import com.harena.api.repository.utils.LoadDataFromJsonFileInterface;
+import com.harena.api.repository.model.possession.Materiel;
+import com.harena.api.repository.utils.IOFileInterface;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MaterielRepository extends LoadDataFromJsonFileInterface<MaterielDataJsonFile> {
+public interface MaterielRepository extends IOFileInterface<Materiel> {
 }

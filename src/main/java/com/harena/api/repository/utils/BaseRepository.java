@@ -34,11 +34,11 @@ public abstract class BaseRepository<T> {
         return Optional.empty();
     }
 
-    public Optional<T> update(Class<T> clazz, T toUpdate) {
+    public Optional<T> update(Class<T> clazz, T toCreate, T toUpdate) {
         var currentData = loadAllData(clazz);
         var index = currentData.indexOf(toUpdate);
         if (index != -1) {
-            currentData.set(index, toUpdate);
+            currentData.set(index, toCreate);
             writeDataToJsonFile.apply(currentData, filePath);
             return Optional.of(toUpdate);
         }

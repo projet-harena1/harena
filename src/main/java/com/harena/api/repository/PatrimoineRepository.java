@@ -1,9 +1,10 @@
 package com.harena.api.repository;
 
-import com.harena.api.dto.json.PatrimoineDataJsonFile;
-import com.harena.api.repository.utils.LoadDataFromJsonFileInterface;
+import com.harena.api.repository.model.Patrimoine;
+import com.harena.api.repository.utils.IOFileInterface;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PatrimoineRepository extends LoadDataFromJsonFileInterface<PatrimoineDataJsonFile> {
+public interface PatrimoineRepository extends IOFileInterface<Patrimoine> {
+    Patrimoine findPatrimoineByNom(String nom);
 }
