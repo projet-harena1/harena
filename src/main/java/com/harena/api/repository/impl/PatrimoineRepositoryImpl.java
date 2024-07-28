@@ -49,7 +49,6 @@ public class PatrimoineRepositoryImpl extends BaseRepository<PatrimoineDTO> impl
         return super.update(PatrimoineDTO.class, createDTO, updateDTO).map(this::toPatrimoine);
     }
 
-
     private PatrimoineDTO toPatrimoineDTO(Patrimoine patrimoine) {
         return PatrimoineDTO.builder()
                 .nom(patrimoine.nom())
@@ -57,19 +56,21 @@ public class PatrimoineRepositoryImpl extends BaseRepository<PatrimoineDTO> impl
                 .t(patrimoine.t())
                 .build();
     }
+
     private Patrimoine toPatrimoine(PatrimoineDTO patrimoineDTO) {
+        var possesseur = personRepository.findPersonByNom(patrimoineDTO.getPersonNom());
         return new Patrimoine(
                 patrimoineDTO.getNom(),
-                personRepository.findPersonByNom(patrimoineDTO.getPersonNom()),
+                possesseur,
                 patrimoineDTO.getT(),
                 Stream.concat(
                         fluxArgentRepository.loadAllData().stream()
-                                .filter(fluxArgent -> fluxArgent.getPatrimoine().nom().equals(patrimoineDTO.getNom())),
+                                .filter(fluxArgent -> fluxArgent.getPatrimoine() != null && fluxArgent.getPatrimoine().nom().equals(patrimoineDTO.getNom())),
                         Stream.concat(
                                 materielRepository.loadAllData().stream()
-                                        .filter(materiel -> materiel.getPatrimoine().nom().equals(patrimoineDTO.getNom())),
+                                        .filter(materiel -> materiel.getPatrimoine() != null && materiel.getPatrimoine().nom().equals(patrimoineDTO.getNom())),
                                 argentRepository.loadAllData().stream()
-                                        .filter(argent -> argent.getPatrimoine().nom().equals(patrimoineDTO.getNom()))
+                                        .filter(argent -> argent.getPatrimoine() != null && argent.getPatrimoine().nom().equals(patrimoineDTO.getNom()))
                         )
                 ).collect(Collectors.toSet())
         );

@@ -81,4 +81,9 @@ public class FluxArgentRepositoryImpl extends BaseRepository<FluxArgentDTO> impl
         );
     }
 
+    @Override
+    public FluxArgent findFluxArgentByNom(String nom) {
+        return this.loadAllData().stream().filter(fluxArgent -> fluxArgent.getNom().equals(nom))
+                .findFirst().orElse(null);
+    }
 }

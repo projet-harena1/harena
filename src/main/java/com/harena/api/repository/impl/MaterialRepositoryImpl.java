@@ -50,6 +50,9 @@ public class MaterialRepositoryImpl extends BaseRepository<MaterielDTO> implemen
     }
 
     private MaterielDTO toMaterielDTO(Materiel materiel) {
+        if (materiel == null) {
+            return null;
+        }
         return new MaterielDTO(
                 materiel.getNom(),
                 materiel.getT(),
@@ -72,4 +75,9 @@ public class MaterialRepositoryImpl extends BaseRepository<MaterielDTO> implemen
         );
     }
 
+    @Override
+    public Materiel findMaterielByNom(String nom) {
+        return this.loadAllData().stream().filter(materiel -> materiel.getNom().equals(nom))
+                .findFirst().orElse(null);
+    }
 }

@@ -60,12 +60,19 @@ public class ArgentRepositoryImpl extends BaseRepository<ArgentDTO> implements A
                 .orElse(null);
     }
 
+    @Override
+    public Argent findArgentByNom(String nom) {
+        return this.loadAllData().stream().filter(argent -> argent.getNom().equals(nom))
+                .findFirst().orElse(null);
+    }
+
     private ArgentDTO toArgentDTO(Argent argent) {
         var type = determineArgentType(argent);
+        String patrimoineNom = (argent.getPatrimoine() != null) ? argent.getPatrimoine().nom() : null;
         return new ArgentDTO(
                 argent.getNom(),
                 argent.getT(),
-                argent.getPatrimoine().nom(),
+                patrimoineNom,
                 argent.getValeurComptable(),
                 argent.getDevise().nom(),
                 argent.getDateOuverture(),
@@ -84,12 +91,12 @@ public class ArgentRepositoryImpl extends BaseRepository<ArgentDTO> implements A
     }
 
     private ArgentType determineArgentType(Argent argent) {
-        if (argent instanceof Dette) {
-            return ArgentType.DETTE;
-        } else if (argent instanceof Creance) {
-            return ArgentType.CREANCE;
-        } else {
-            return ArgentType.AUTRES;
-        }
+            if (argent.getValeurComptable() > 0) {
+                return ArgentType.CREANCE;
+            } else if (argent.getValeurComptable() < 0) {
+                return ArgentType.DETTE;
+            } else {
+                return ArgentType.AUTRES;
+            }
     }
 }

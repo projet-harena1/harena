@@ -1,5 +1,7 @@
 package com.harena.api.repository.model.possession;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.harena.api.repository.model.Devise;
 import lombok.Getter;
 import lombok.ToString;
@@ -17,15 +19,24 @@ public sealed class Argent extends Possession permits Dette, Creance {
     private final LocalDate dateOuverture;
     private final Set<FluxArgent> fluxArgents;
 
+    @JsonCreator
+    public Argent(
+            @JsonProperty("nom") String nom,
+            @JsonProperty("date_d_ouverture") LocalDate dateOuverture,
+            @JsonProperty("t") LocalDate t,
+            @JsonProperty("valeur_comptable") int valeurComptable,
+            @JsonProperty("flux_argents") Set<FluxArgent> fluxArgents,
+            @JsonProperty("devise") Devise devise
+    ) {
+        super(nom, t, valeurComptable, devise);
+        this.fluxArgents = fluxArgents != null ? fluxArgents : new HashSet<>();
+        this.dateOuverture = dateOuverture;
+    }
+
     public Argent(String nom, LocalDate t, int valeurComptable, Devise devise) {
         this(nom, t, t, valeurComptable, devise);
     }
 
-    private Argent(String nom, LocalDate dateOuverture, LocalDate t, int valeurComptable, Set<FluxArgent> fluxArgents, Devise devise) {
-        super(nom, t, valeurComptable, devise);
-        this.fluxArgents = fluxArgents;
-        this.dateOuverture = dateOuverture;
-    }
 
     public Argent(String nom, LocalDate dateOuverture, LocalDate t, int valeurComptable, Devise devise) {
         this(nom, dateOuverture, t, valeurComptable, new HashSet<>(), devise);

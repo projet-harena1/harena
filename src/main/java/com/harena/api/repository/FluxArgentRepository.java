@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FluxArgentRepository extends IOFileInterface<FluxArgent> {
+    FluxArgent findFluxArgentByNom(String nom);
 }

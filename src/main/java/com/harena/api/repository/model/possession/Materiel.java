@@ -1,6 +1,8 @@
 package com.harena.api.repository.model.possession;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.harena.api.repository.model.Devise;
 import lombok.Getter;
 
@@ -15,12 +17,20 @@ public final class Materiel extends Possession {
     private final LocalDate dateAcquisition;
     private final double tauxDAppreciationAnnuelle;
 
+
+    @JsonCreator
     public Materiel(
-            String nom, LocalDate t, int valeurComptable, LocalDate dateAcquisition, double tauxDAppreciationAnnuelle, Devise devise) {
+            @JsonProperty("nom") String nom,
+            @JsonProperty("t") LocalDate t,
+            @JsonProperty("valeur_comptable") int valeurComptable,
+            @JsonProperty("date_d_acquisition") LocalDate dateAcquisition,
+            @JsonProperty("taux_d_appreciation_annuelle") double tauxDAppreciationAnnuelle,
+            @JsonProperty("devise") Devise devise) {
         super(nom, t, valeurComptable, devise);
         this.dateAcquisition = dateAcquisition;
         this.tauxDAppreciationAnnuelle = tauxDAppreciationAnnuelle;
     }
+
 
     public Materiel(
             String nom, LocalDate t, int valeurComptable, LocalDate dateAcquisition, double tauxDAppreciationAnnuelle) {

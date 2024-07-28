@@ -2,10 +2,7 @@ package com.harena.api.repository.model.possession;
 
 import com.harena.api.repository.model.Devise;
 import com.harena.api.repository.model.Patrimoine;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -24,6 +21,7 @@ public sealed abstract class Possession implements Serializable /*note(no-serial
     protected final LocalDate t;
     protected final int valeurComptable;
     protected final Devise devise;
+    @Setter
     protected Patrimoine patrimoine;
 
     public Possession(String nom, LocalDate t, int valeurComptable) {

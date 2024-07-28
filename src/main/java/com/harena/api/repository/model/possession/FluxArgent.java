@@ -1,5 +1,7 @@
 package com.harena.api.repository.model.possession;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.harena.api.repository.model.Devise;
 import lombok.Getter;
 import lombok.ToString;
@@ -20,16 +22,24 @@ public final class FluxArgent extends Possession {
     private final int fluxMensuel;
     private final int dateOperation;
 
+    @JsonCreator
     public FluxArgent(
-            String nom, Argent argent, LocalDate debut, LocalDate fin, int fluxMensuel, int dateOperation, Devise devise) {
+            @JsonProperty("nom") String nom,
+            @JsonProperty("argent") Argent argent,
+            @JsonProperty("debut") LocalDate debut,
+            @JsonProperty("fin") LocalDate fin,
+            @JsonProperty("flux_mensuel") int fluxMensuel,
+            @JsonProperty("date_operation") int dateOperation,
+            @JsonProperty("devise") Devise devise) {
         super(nom, null, 0, devise);
         this.argent = argent;
-        this.argent.addFinancés(this);
-
         this.debut = debut;
         this.fin = fin;
         this.fluxMensuel = fluxMensuel;
         this.dateOperation = dateOperation;
+        if (this.argent != null) {
+            this.argent.addFinancés(this);
+        }
     }
 
     public FluxArgent(
