@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class PatrimoineRepositoryImpl extends BaseRepository<PatrimoineDTO> implements PatrimoineRepository {
@@ -31,7 +32,9 @@ public class PatrimoineRepositoryImpl extends BaseRepository<PatrimoineDTO> impl
 
     @Override
     public List<Patrimoine> loadAllData() {
-        return List.of();
+        return  super.loadAllData(PatrimoineDTO.class).stream()
+                .map(this::toPatrimoine)
+                .collect(Collectors.toList());
     }
 
     @Override
