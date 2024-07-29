@@ -75,15 +75,18 @@ public class MaterialRepositoryImpl extends BaseRepository<MaterielDTO> implemen
         var patrimoine = (materielDTO.getPatrimoineNom() != null)
                 ? patrimoineRepository.findPatrimoineByNom(materielDTO.getPatrimoineNom())
                 : null;
-
-        String code = materielDTO.getDevise().getCode();
-        Devise devise = deviseRepository.findDeviseByCode(code);
-        if (devise == null) {
-            var createdDevise = deviseRepository.create(new Devise(materielDTO.getDevise().getNom(), code));
-            if (createdDevise.isPresent()) {
-                devise = createdDevise.get();
-            } else {
-                throw new InternalServerException("Failed to create Devise with code: " + code);
+        String code;
+        Devise devise = null;
+        if (materielDTO.getDevise() != null){
+             code = materielDTO.getDevise().getCode();
+             devise = deviseRepository.findDeviseByCode(code);
+            if (devise == null) {
+                var createdDevise = deviseRepository.create(new Devise(materielDTO.getDevise().getNom(), code));
+                if (createdDevise.isPresent()) {
+                    devise = createdDevise.get();
+                } else {
+                    throw new InternalServerException("Failed to create Devise with code: " + code);
+                }
             }
         }
         return new Materiel(

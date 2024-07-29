@@ -93,15 +93,13 @@ public class ArgentRepositoryImpl extends BaseRepository<ArgentDTO> implements A
     private DeviseDTO findOrCreateDeviseDTO(Devise devise) {
         var foundDevise = deviseRepository.findDeviseByCode(devise.code());
         if (foundDevise == null) {
-            var createdDevise = deviseRepository.create(new Devise(devise.nom(), devise.code())).
-                    orElseThrow(() -> new InternalServerException("Error creating devise"));
+            var createdDevise = deviseRepository.create(new Devise(devise.nom(), devise.code()))
+                    .orElseThrow(() -> new IllegalStateException("Failed to create Devise with code: " + devise.code()));
             return new DeviseDTO(createdDevise.nom(), createdDevise.code());
         } else {
             return new DeviseDTO(foundDevise.nom(), foundDevise.code());
         }
     }
-
-
 
     private Argent toArgent(ArgentDTO argentDTO) {
         var patrimoine = (argentDTO.getPatrimoineNom() != null)

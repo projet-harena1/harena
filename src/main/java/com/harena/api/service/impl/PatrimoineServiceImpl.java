@@ -6,6 +6,7 @@ import com.harena.api.exceptions.ResourceNotFoundException;
 import com.harena.api.repository.PatrimoineRepository;
 import com.harena.api.repository.PersonRepository;
 import com.harena.api.repository.model.Patrimoine;
+import com.harena.api.repository.model.possession.Argent;
 import com.harena.api.service.PatrimoineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -55,7 +56,7 @@ public class PatrimoineServiceImpl implements PatrimoineService {
                );
            } else {
               patrimoines.add(toRestPatrimoine(patrimoineRepository.create(toPatrimoine(restPatrimoine))
-                      .orElseThrow(() -> new InternalServerException("Error creating patrimoine ")))
+              .orElseThrow(() -> new InternalServerException("Error creating patrimoine ")))
               );
            }
         });
@@ -108,7 +109,7 @@ public class PatrimoineServiceImpl implements PatrimoineService {
                 patrimoine.getNom(),
                 patrimoine.getPossesseur(),
                 patrimoine.getT(),
-                Set.of()
+                Set.of(new Argent("ok", LocalDate.now(), LocalDate.now(), 1220000))
         );
     }
 }

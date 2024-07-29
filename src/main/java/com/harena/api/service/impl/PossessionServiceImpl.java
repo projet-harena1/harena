@@ -186,8 +186,11 @@ public class PossessionServiceImpl implements PossessionService {
         var foundFlux = fluxArgentRepository.findFluxArgentByNom(fluxArgent.getNom());
         if (foundFlux == null){
             fluxArgentRepository.create(fluxArgent);
+        } else {
+            fluxArgentRepository.update(fluxArgent, foundFlux);
         }
-        fluxArgentRepository.update(fluxArgent, foundFlux);
+        patrimoine.possessions().add(fluxArgent);
+        patrimoineRepository.update(patrimoine, patrimoine);
     }
 
     private void saveArgent(Argent argent, String patrimoineNom) {

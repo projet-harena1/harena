@@ -3,6 +3,7 @@ package com.harena.api.repository.impl;
 import com.harena.api.dto.DeviseDTO;
 import com.harena.api.dto.FluxArgentDTO;
 import com.harena.api.exceptions.InternalServerException;
+import com.harena.api.exceptions.ResourceNotFoundException;
 import com.harena.api.repository.ArgentRepository;
 import com.harena.api.repository.DeviseRepository;
 import com.harena.api.repository.FluxArgentRepository;
@@ -61,13 +62,18 @@ public class FluxArgentRepositoryImpl extends BaseRepository<FluxArgentDTO> impl
     private FluxArgentDTO toFluxArgentDTO(FluxArgent fluxArgent) {
         var argentNom = argentRepository.findArgentByNomAndPatrimoine(fluxArgent.getNom(), fluxArgent.getPatrimoine().nom());
         var devise = fluxArgent.getDevise();
-        var foundDevise = deviseRepository.findDeviseByCode(devise.code());
-        if (foundDevise == null) {
-            devise = deviseRepository.create(new Devise(devise.nom(), devise.code())).orElseThrow(
-                    () -> new InternalServerException("Error create devise"));
+        if (devise != null) {
+            var foundDevise = deviseRepository.findDeviseByCode(devise.code());
+            if (foundDevise == null) {
+                devise = deviseRepository.create(new Devise(devise.nom(), devise.code())).orElseThrow(
+                        () -> new InternalServerException("Error creating devise"));
+            } else {
+                devise = foundDevise;
+            }
         } else {
-            devise = foundDevise;
+            throw new ResourceNotFoundException("Devise cannot be null");
         }
+
         return FluxArgentDTO.builder()
                 .argentNom(argentNom.getNom())
                 .fin(fluxArgent.getFin())
@@ -82,8 +88,6 @@ public class FluxArgentRepositoryImpl extends BaseRepository<FluxArgentDTO> impl
                 .devise(new DeviseDTO(devise.nom(), devise.code()))
                 .build();
     }
-
-
 
     private FluxArgent toFluxArgent(FluxArgentDTO dto) {
         var patrimoine = (dto.getPatrimoineNom() != null)

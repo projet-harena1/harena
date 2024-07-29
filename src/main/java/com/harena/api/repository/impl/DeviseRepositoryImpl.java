@@ -47,7 +47,7 @@ public class DeviseRepositoryImpl extends BaseRepository<DeviseDTO> implements D
 
     @Override
     public Devise findDeviseByCode(String deviseCode) {
-        return loadAllData().stream()
+        return this.loadAllData().stream()
                 .filter(devise -> devise.code().equals(deviseCode))
                 .findFirst()
                 .orElse(null);
@@ -58,6 +58,6 @@ public class DeviseRepositoryImpl extends BaseRepository<DeviseDTO> implements D
     }
 
     private DeviseDTO toDeviseDTO(Devise devise) {
-        return new DeviseDTO(devise.nom(), devise.code());
+        return new DeviseDTO(devise.code(), devise.nom());
     }
 }
