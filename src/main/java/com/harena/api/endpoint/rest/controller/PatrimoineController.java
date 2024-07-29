@@ -28,4 +28,12 @@ public class PatrimoineController {
         return patrimoineService.findPatrimoineByNom(patrimoineNom);
     }
 
+    @GetMapping
+    public List<RestPatrimoine> getPatrimoines(
+            @RequestParam(name = "page", required = false) Long page,
+            @RequestParam(name = "page_size", required = false) Long pageSize
+    ) {
+        return patrimoineService.findAllPatrimoines(page, pageSize);
+    }
+
 }
