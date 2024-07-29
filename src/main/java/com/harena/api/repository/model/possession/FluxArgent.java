@@ -3,6 +3,7 @@ package com.harena.api.repository.model.possession;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.harena.api.repository.model.Devise;
+import com.harena.api.repository.model.Patrimoine;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,15 @@ public final class FluxArgent extends Possession {
         if (this.argent != null) {
             this.argent.addFinancés(this);
         }
+    }
+
+    public FluxArgent(String nom, LocalDate t, int valeurComptable, Devise devise, Patrimoine patrimoine, Argent argent, LocalDate debut, LocalDate fin, int fluxMensuel, int dateOperation) {
+        super(nom, t, valeurComptable, devise, patrimoine);
+        this.argent = argent;
+        this.debut = debut;
+        this.fin = fin;
+        this.fluxMensuel = fluxMensuel;
+        this.dateOperation = dateOperation;
     }
 
     public FluxArgent(

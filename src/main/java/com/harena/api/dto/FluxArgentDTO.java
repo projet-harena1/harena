@@ -16,7 +16,7 @@ public class FluxArgentDTO {
     private LocalDate t;
     private String patrimoineNom;
     private Integer valeurComptable;
-    private String deviseCode;
+    private DeviseDTO devise;
     private LocalDate debut;
     private LocalDate fin;
     private Integer dateOperation;

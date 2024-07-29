@@ -17,7 +17,7 @@ public class MaterielDTO {
     private LocalDate t;
     private String patrimoineNom;
     private Integer valeurComptable;
-    private String deviseCode;
+    private DeviseDTO devise;
     private LocalDate dateAcquisition;
     private Double tauxDAppreciationAnnuelle;
 }

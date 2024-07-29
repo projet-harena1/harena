@@ -44,4 +44,12 @@ public abstract class BaseRepository<T> {
         }
         return Optional.empty();
     }
+
+    public void delete(Class<T> clazz, T toDelete) {
+        var currentData = loadAllData(clazz);
+        var removed = currentData.removeIf(p -> p.equals(toDelete));
+        if (removed) {
+            writeDataToJsonFile.apply(currentData, filePath);
+        }
+    }
 }

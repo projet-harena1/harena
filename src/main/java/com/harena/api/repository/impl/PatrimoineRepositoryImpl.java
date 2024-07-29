@@ -1,7 +1,8 @@
 package com.harena.api.repository.impl;
 
 import com.harena.api.dto.PatrimoineDTO;
-import com.harena.api.repository.*;
+import com.harena.api.repository.PatrimoineRepository;
+import com.harena.api.repository.PersonRepository;
 import com.harena.api.repository.model.Patrimoine;
 import com.harena.api.repository.utils.BaseRepository;
 import com.harena.api.repository.utils.ReadDataFromJsonFile;
@@ -9,24 +10,22 @@ import com.harena.api.repository.utils.WriteDataToJsonFile;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Repository
 public class PatrimoineRepositoryImpl extends BaseRepository<PatrimoineDTO> implements PatrimoineRepository {
     private final PersonRepository personRepository;
-    private final MaterielRepository materielRepository;
-    private final FluxArgentRepository fluxArgentRepository;
-    private final ArgentRepository argentRepository;
-
-    public PatrimoineRepositoryImpl(ReadDataFromJsonFile<PatrimoineDTO> readDataFromJsonFile, WriteDataToJsonFile<PatrimoineDTO> writeDataToJsonFile, @Value("${path.to.file.patrimoine}") String filePath, PersonRepository personRepository, MaterielRepository materielRepository, FluxArgentRepository fluxArgentRepository, ArgentRepository argentRepository) {
+    public PatrimoineRepositoryImpl(
+            ReadDataFromJsonFile<PatrimoineDTO> readDataFromJsonFile,
+            WriteDataToJsonFile<PatrimoineDTO> writeDataToJsonFile,
+            @Value("${path.to.file.patrimoine}") String filePath,
+            PersonRepository personRepository
+    ) {
         super(readDataFromJsonFile, writeDataToJsonFile, filePath);
         this.personRepository = personRepository;
-        this.materielRepository = materielRepository;
-        this.fluxArgentRepository = fluxArgentRepository;
-        this.argentRepository = argentRepository;
     }
 
     @Override
@@ -63,21 +62,7 @@ public class PatrimoineRepositoryImpl extends BaseRepository<PatrimoineDTO> impl
                 patrimoineDTO.getNom(),
                 possesseur,
                 patrimoineDTO.getT(),
-                Stream.concat(
-                        fluxArgentRepository.loadAllData()
-                                .stream()
-                                .filter(
-                                        fluxArgent ->
-                                                fluxArgent.getPatrimoine() != null && fluxArgent.getPatrimoine().nom()
-                                                        .equals(patrimoineDTO.getNom())
-                                ),
-                        Stream.concat(
-                                materielRepository.loadAllData().stream()
-                                        .filter(materiel -> materiel.getPatrimoine() != null && materiel.getPatrimoine().nom().equals(patrimoineDTO.getNom())),
-                                argentRepository.loadAllData().stream()
-                                        .filter(argent -> argent.getPatrimoine() != null && argent.getPatrimoine().nom().equals(patrimoineDTO.getNom()))
-                        )
-                ).collect(Collectors.toSet())
+                new HashSet<>()
         );
     }
 

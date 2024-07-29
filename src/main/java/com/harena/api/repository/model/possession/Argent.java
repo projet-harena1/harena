@@ -3,6 +3,7 @@ package com.harena.api.repository.model.possession;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.harena.api.repository.model.Devise;
+import com.harena.api.repository.model.Patrimoine;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -31,6 +32,14 @@ public sealed class Argent extends Possession permits Dette, Creance {
         super(nom, t, valeurComptable, devise);
         this.fluxArgents = fluxArgents != null ? fluxArgents : new HashSet<>();
         this.dateOuverture = dateOuverture;
+    }
+
+    public Argent(String nom, LocalDate t, int valeurComptable, Devise devise,
+                  Patrimoine patrimoine,
+                  LocalDate dateOuverture, Set<FluxArgent> fluxArgents) {
+        super(nom, t, valeurComptable, devise, patrimoine);
+        this.dateOuverture = dateOuverture;
+        this.fluxArgents = fluxArgents;
     }
 
     public Argent(String nom, LocalDate t, int valeurComptable, Devise devise) {

@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ArgentRepository extends IOFileInterface<Argent> {
     Argent findArgentByNomAndPatrimoine(String argentNom, String patrimoineNom);
-
     Argent findArgentByNom(String nom);
+    void delete(Argent argent);
 }
