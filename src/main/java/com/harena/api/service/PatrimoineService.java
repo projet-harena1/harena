@@ -13,4 +13,6 @@ public interface PatrimoineService {
     RestPatrimoine findPatrimoineByNom(String patrimoineNom);
 
     List<RestPatrimoine> projectionFuture(LocalDate futureDate);
+    List<RestPatrimoine> findAllPatrimoines(Long page, Long pageSize);
+
 }
