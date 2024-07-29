@@ -25,7 +25,17 @@ public class PatrimoineServiceImpl implements PatrimoineService {
 
     @Override
     public List<RestPatrimoine> findAllPatrimoines(Long page, Long pageSize) {
-        return List.of();
+        var allPatrimoines = patrimoineRepository.loadAllData();
+        if (page == null || pageSize == null) {
+            return allPatrimoines.stream()
+                    .map(this::toRestPatrimoine)
+                    .collect(Collectors.toList());
+        }
+        return allPatrimoines.stream()
+                .skip((page - 1) * pageSize)
+                .limit(pageSize)
+                .map(this::toRestPatrimoine)
+                .collect(Collectors.toList());
     }
 
     @Override
