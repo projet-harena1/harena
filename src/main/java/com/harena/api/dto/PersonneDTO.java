@@ -10,5 +10,5 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 public class PersonneDTO {
-    private String nom;
+  private String nom;
 }

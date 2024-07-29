@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PersonRepository extends IOFileInterface<Personne> {
-    Personne findPersonByNom(String nom);
+  Personne findPersonByNom(String nom);
 }

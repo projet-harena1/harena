@@ -1,8 +1,7 @@
 package com.harena.api.dto;
 
-import lombok.*;
-
 import java.time.LocalDate;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,7 +11,7 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 @ToString
 public class FluxImpossibleDTO {
-    private LocalDate date;
-    private String nomArgent;
-    private Integer valeurArgent;
+  private LocalDate date;
+  private String nomArgent;
+  private Integer valeurArgent;
 }

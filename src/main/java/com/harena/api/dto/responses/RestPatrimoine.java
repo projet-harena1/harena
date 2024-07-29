@@ -2,9 +2,8 @@ package com.harena.api.dto.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.harena.api.repository.model.Personne;
-import lombok.*;
-
 import java.time.LocalDate;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,15 +13,15 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 @ToString
 public class RestPatrimoine {
-    @JsonProperty("nom")
-    private String nom;
+  @JsonProperty("nom")
+  private String nom;
 
-    @JsonProperty("t")
-    private LocalDate t;
+  @JsonProperty("t")
+  private LocalDate t;
 
-    @JsonProperty("possesseur")
-    private Personne possesseur;
+  @JsonProperty("possesseur")
+  private Personne possesseur;
 
-    @JsonProperty("valeur_comptable")
-    private Integer valeurComptable;
+  @JsonProperty("valeur_comptable")
+  private Integer valeurComptable;
 }

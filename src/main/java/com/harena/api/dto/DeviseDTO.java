@@ -10,6 +10,6 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 public class DeviseDTO {
-    private String code;
-    private String nom;
+  private String code;
+  private String nom;
 }

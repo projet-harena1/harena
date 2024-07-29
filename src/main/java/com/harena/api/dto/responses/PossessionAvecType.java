@@ -16,8 +16,8 @@ import lombok.*;
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PossessionAvecType {
-    private PossessionType type;
-    private Argent argent;
-    private Materiel materiel;
-    private FluxArgent fluxArgent;
+  private PossessionType type;
+  private Argent argent;
+  private Materiel materiel;
+  private FluxArgent fluxArgent;
 }

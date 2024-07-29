@@ -1,9 +1,7 @@
 package com.harena.api.dto;
 
-
-import lombok.*;
-
 import java.time.LocalDate;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,11 +11,11 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 @ToString
 public class MaterielDTO {
-    private String nom;
-    private LocalDate t;
-    private String patrimoineNom;
-    private Integer valeurComptable;
-    private DeviseDTO devise;
-    private LocalDate dateAcquisition;
-    private Double tauxDAppreciationAnnuelle;
+  private String nom;
+  private LocalDate t;
+  private String patrimoineNom;
+  private Integer valeurComptable;
+  private DeviseDTO devise;
+  private LocalDate dateAcquisition;
+  private Double tauxDAppreciationAnnuelle;
 }

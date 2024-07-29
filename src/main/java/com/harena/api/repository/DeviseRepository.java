@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DeviseRepository extends IOFileInterface<Devise> {
-    Devise findDeviseByCode(String deviseCode);
+  Devise findDeviseByCode(String deviseCode);
 }

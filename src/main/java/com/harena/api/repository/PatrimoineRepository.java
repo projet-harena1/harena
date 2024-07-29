@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PatrimoineRepository extends IOFileInterface<Patrimoine> {
-    Patrimoine findPatrimoineByNom(String nom);
+  Patrimoine findPatrimoineByNom(String nom);
 }
