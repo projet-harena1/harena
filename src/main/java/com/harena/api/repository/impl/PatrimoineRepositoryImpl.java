@@ -13,11 +13,11 @@ import org.springframework.stereotype.Repository;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Repository
 public class PatrimoineRepositoryImpl extends BaseRepository<PatrimoineDTO> implements PatrimoineRepository {
     private final PersonRepository personRepository;
+
     public PatrimoineRepositoryImpl(
             ReadDataFromJsonFile<PatrimoineDTO> readDataFromJsonFile,
             WriteDataToJsonFile<PatrimoineDTO> writeDataToJsonFile,
@@ -28,11 +28,10 @@ public class PatrimoineRepositoryImpl extends BaseRepository<PatrimoineDTO> impl
         this.personRepository = personRepository;
     }
 
+
     @Override
     public List<Patrimoine> loadAllData() {
-        return super.loadAllData(PatrimoineDTO.class).stream()
-                .map(this::toPatrimoine)
-                .collect(Collectors.toList());
+        return List.of();
     }
 
     @Override

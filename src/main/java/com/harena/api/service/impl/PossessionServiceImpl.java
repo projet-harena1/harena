@@ -26,10 +26,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class PossessionServiceImpl implements PossessionService {
-   private final PatrimoineRepository patrimoineRepository;
-   private final ArgentRepository argentRepository;
-   private final FluxArgentRepository fluxArgentRepository;
-   private final MaterielRepository materielRepository;
+    private final PatrimoineRepository patrimoineRepository;
+    private final ArgentRepository argentRepository;
+    private final FluxArgentRepository fluxArgentRepository;
+    private final MaterielRepository materielRepository;
 
     @Override
     public List<PossessionAvecType> savePatrimoinePossessions(
@@ -37,15 +37,16 @@ public class PossessionServiceImpl implements PossessionService {
             List<PossessionAvecType> possessionAvecTypes
     ) {
         var patrimoine = patrimoineRepository.findPatrimoineByNom(patrimoineNom);
-        if (patrimoine == null){
+        if (patrimoine == null) {
             throw new ResourceNotFoundException(patrimoineNom + " does not exist");
         }
         possessionAvecTypes.forEach(possessionAvecType -> {
             switch (possessionAvecType.getType()) {
-                case ARGENT -> this.saveArgent(possessionAvecType.getArgent(),patrimoineNom);
+                case ARGENT -> this.saveArgent(possessionAvecType.getArgent(), patrimoineNom);
                 case FLUXARGENT -> this.saveFluxArgent(possessionAvecType.getFluxArgent(), patrimoineNom);
                 case MATERIEL -> this.saveMateriel(possessionAvecType.getMateriel(), patrimoineNom);
-                default -> throw new IllegalArgumentException("Unknown possession type: " + possessionAvecType.getType());
+                default ->
+                        throw new IllegalArgumentException("Unknown possession type: " + possessionAvecType.getType());
             }
         });
         return possessionAvecTypes;
@@ -166,25 +167,26 @@ public class PossessionServiceImpl implements PossessionService {
 
     private void saveMateriel(Materiel materiel, String patrimoineNom) {
         var patrimoine = patrimoineRepository.findPatrimoineByNom(patrimoineNom);
-        if (patrimoine == null){
+        if (patrimoine == null) {
             throw new ResourceNotFoundException("Patrimoine not found");
         }
         materiel.setPatrimoine(patrimoine);
         var foundMateriel = materielRepository.findMaterielByNom(materiel.getNom());
-        if (foundMateriel == null){
+        if (foundMateriel == null) {
             materielRepository.create(materiel);
+        } else {
+            materielRepository.update(materiel, foundMateriel);
         }
-        materielRepository.update(materiel, foundMateriel);
     }
 
-    private void saveFluxArgent(FluxArgent fluxArgent,  String patrimoineNom) {
+    private void saveFluxArgent(FluxArgent fluxArgent, String patrimoineNom) {
         var patrimoine = patrimoineRepository.findPatrimoineByNom(patrimoineNom);
-        if (patrimoine == null){
+        if (patrimoine == null) {
             throw new ResourceNotFoundException("Patrimoine not found");
         }
         fluxArgent.setPatrimoine(patrimoine);
         var foundFlux = fluxArgentRepository.findFluxArgentByNom(fluxArgent.getNom());
-        if (foundFlux == null){
+        if (foundFlux == null) {
             fluxArgentRepository.create(fluxArgent);
         } else {
             fluxArgentRepository.update(fluxArgent, foundFlux);
@@ -195,7 +197,7 @@ public class PossessionServiceImpl implements PossessionService {
 
     private void saveArgent(Argent argent, String patrimoineNom) {
         var patrimoine = patrimoineRepository.findPatrimoineByNom(patrimoineNom);
-        if (patrimoine == null){
+        if (patrimoine == null) {
             throw new ResourceNotFoundException("Patrimoine not found");
         }
         argent.setPatrimoine(patrimoine);

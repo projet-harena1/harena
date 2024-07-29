@@ -97,7 +97,7 @@ public class FluxArgentRepositoryImpl extends BaseRepository<FluxArgentDTO> impl
         var devise = deviseDTO != null ? new Devise(
                 deviseDTO.getNom(),
                 deviseDTO.getCode()
-        ): null;
+        ) : null;
         return new FluxArgent(
                 dto.getNom(),
                 dto.getT(),

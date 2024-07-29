@@ -3,7 +3,6 @@ package com.harena.api.repository.impl;
 import com.harena.api.dto.ArgentDTO;
 import com.harena.api.dto.DeviseDTO;
 import com.harena.api.enums.ArgentType;
-import com.harena.api.exceptions.InternalServerException;
 import com.harena.api.repository.ArgentRepository;
 import com.harena.api.repository.DeviseRepository;
 import com.harena.api.repository.PatrimoineRepository;
@@ -24,6 +23,7 @@ import java.util.Optional;
 public class ArgentRepositoryImpl extends BaseRepository<ArgentDTO> implements ArgentRepository {
     private final DeviseRepository deviseRepository;
     private final PatrimoineRepository patrimoineRepository;
+
     public ArgentRepositoryImpl(
             ReadDataFromJsonFile<ArgentDTO> readDataFromJsonFile,
             WriteDataToJsonFile<ArgentDTO> writeDataToJsonFile,
@@ -110,7 +110,7 @@ public class ArgentRepositoryImpl extends BaseRepository<ArgentDTO> implements A
         var devise = deviseDTO != null ? new Devise(
                 deviseDTO.getNom(),
                 deviseDTO.getCode()
-        ): null;
+        ) : null;
 
         return new Argent(
                 argentDTO.getNom(),
@@ -124,12 +124,12 @@ public class ArgentRepositoryImpl extends BaseRepository<ArgentDTO> implements A
     }
 
     private ArgentType determineArgentType(Argent argent) {
-            if (argent.getValeurComptable() > 0) {
-                return ArgentType.CREANCE;
-            } else if (argent.getValeurComptable() < 0) {
-                return ArgentType.DETTE;
-            } else {
-                return ArgentType.AUTRES;
-            }
+        if (argent.getValeurComptable() > 0) {
+            return ArgentType.CREANCE;
+        } else if (argent.getValeurComptable() < 0) {
+            return ArgentType.DETTE;
+        } else {
+            return ArgentType.AUTRES;
+        }
     }
 }

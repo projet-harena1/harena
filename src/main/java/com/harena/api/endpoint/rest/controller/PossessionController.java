@@ -19,7 +19,7 @@ public class PossessionController {
     public List<PossessionAvecType> crupdatePatrimoinePossessions(
             @PathVariable(name = "nom_patrimoine", required = false) String patrimoineNom,
             @RequestBody List<PossessionAvecType> possessionAvecTypes
-            ){
+    ) {
         return possessionService.savePatrimoinePossessions(patrimoineNom, possessionAvecTypes);
     }
 
@@ -27,7 +27,7 @@ public class PossessionController {
     public List<PossessionAvecType> getPatrimoinePossessions(
             @RequestParam(name = "page") Long page,
             @RequestParam(name = "page_size") Long pageSize,
-            @PathVariable (name = "nom_patrimoine")String patrimoineNom) {
+            @PathVariable(name = "nom_patrimoine") String patrimoineNom) {
         return possessionService.findPatrimoinePossessions(patrimoineNom, page, pageSize);
     }
 

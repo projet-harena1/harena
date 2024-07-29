@@ -22,6 +22,7 @@ import java.util.Optional;
 public class MaterialRepositoryImpl extends BaseRepository<MaterielDTO> implements MaterielRepository {
     private final DeviseRepository deviseRepository;
     private final PatrimoineRepository patrimoineRepository;
+
     public MaterialRepositoryImpl(
             ReadDataFromJsonFile<MaterielDTO> readDataFromJsonFile,
             WriteDataToJsonFile<MaterielDTO> writeDataToJsonFile,
@@ -77,9 +78,9 @@ public class MaterialRepositoryImpl extends BaseRepository<MaterielDTO> implemen
                 : null;
         String code;
         Devise devise = null;
-        if (materielDTO.getDevise() != null){
-             code = materielDTO.getDevise().getCode();
-             devise = deviseRepository.findDeviseByCode(code);
+        if (materielDTO.getDevise() != null) {
+            code = materielDTO.getDevise().getCode();
+            devise = deviseRepository.findDeviseByCode(code);
             if (devise == null) {
                 var createdDevise = deviseRepository.create(new Devise(materielDTO.getDevise().getNom(), code));
                 if (createdDevise.isPresent()) {
